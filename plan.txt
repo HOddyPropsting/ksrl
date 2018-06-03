@@ -1,0 +1,22 @@
+Plan:
+
+1: get libtcod working
+a) get libtcod working (%)
+b) create github repo (%)
+c) get main loop + display working (%)
+d) get main inputs working (%)
+
+2: display loop
+a) game states
+b) refresh
+c) buffering?
+
+2: comfortable animations system
+a) new state
+b) animation type
+c) eases
+d) animation states
+e) compound animations
+f) effects from an animation??
+
+4: entity handling

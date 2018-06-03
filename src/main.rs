@@ -1,20 +1,28 @@
 extern crate tcod;
 
 use tcod::*;
-use console::{Root, Offscreen};
-
+use console::{Root};
+use input::KeyPressFlags;
 
 
 fn main() {
-    println!("Hello, world!");
-
-    let mut c = Root::initializer().init();
-    let (width,height) = (80,30);
-    let mut buff = Offscreen::new(width,height);
-
-    while !c.window_closed() {
-
+  let (width,height) = (80,80);
+  let mut c = Root::initializer()
+    .size(width,height)
+    .font_dimensions(16,16)
+    .font("terminal.png", FontLayout::AsciiInCol)
+    .fullscreen(false)
+    .init();
+  c.clear();
+  c.set_default_foreground(colors::CRIMSON);
+  c.set_char(40,20, 'r');
+  c.horizontal_line(2,2,10,BackgroundFlag::None);
+  loop {
+    c.flush();
+    let k = c.check_for_keypress(KeyPressFlags::all());
+    match k {
+      None => { }
+      _ => { break }
     }
-
+  }
 }
-
