@@ -5,3 +5,4 @@ authors = ["HOddyPropsting <h.oddy.propsting@gmail.com>"]
 
 [dependencies]
 tcod = "0.12.1"
+time = "0.1.40"
