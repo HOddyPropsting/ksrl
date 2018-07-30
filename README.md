@@ -1,6 +1,11 @@
 # ksrl - Kobold Slayer Roguelike
 A roguelike idea I initially prototyped in C#. I wanted to re-make it in Rust to get to help get to grips with the language. The pain points in the prototype were the lack of planned architecture and the method by which the game interacted with the display, particularly concerning particles.
 
+# Build Instructions
+1. Download the repo
+2. Install Cargo using rustup https://rustup.rs/
+3. navigate to directory and call ```Cargo run```
+
 # Gameplay Overview
 A lone adventurer travelling through kobold warrens. Watch out, for you are big and the tunnels are small, you are one and the kobolds are endless. Keep your wits about you, for the kobolds are cunning and have many traps.
 
