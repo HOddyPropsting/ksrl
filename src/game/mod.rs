@@ -47,18 +47,20 @@ impl Game {
     'game_loop: loop {
       match self.state {
         GameState::InGame => {
-          self.console.clear();
+          self.console.clear();          
+          self.console.print(0,0,"Press Esc to quit");
           self.console.flush();
           let k = self.console.wait_for_keypress(true);
           if k.code == KeyCode::Enter {
             prev = PreciseTime::now();
-            self.particles.push(Emitter{ duration : 5000, spawn_time : 200, x : 20f32, y : 20f32, ..Default::default()});
             self.state = GameState::Animating;
           }
           if k.code == KeyCode::Escape {
             self.state = GameState::Quit;
           }
         },
+
+        // TODO: move this code out to the particle system, don't want to think about it here.
         GameState::Animating => {
           let now = PreciseTime::now();
           let dt = prev.to(now);

@@ -1,3 +1,5 @@
+use game::particle_system::tween_type::TweenType;
+
 pub enum MovementStrategy{
    Stationary,
    Physics(Physics),
@@ -30,20 +32,6 @@ impl Physics{
   }
 }
 
-pub enum TweenType{
-  Linear,
-  QuadraticIn,
-  CubicIn,
-  QuadraticOut,
-  CubicOut,
-}
-
-impl Default for TweenType{
-  fn default() -> TweenType{
-    TweenType::Linear
-  }
-}
-
 #[derive(Default)]
 pub struct PositionTween{
   pub start_x  : f32,
@@ -58,21 +46,11 @@ pub struct PositionTween{
 
 impl PositionTween {
 
-  fn tween_internal(t : f32, start : f32, change:f32, tween_type: &TweenType) -> f32{
-    match tween_type{
-      TweenType::Linear => { start + (t * change)},
-      TweenType::QuadraticIn => { start + (t.powi(2) * change)},
-      TweenType::CubicIn => { start + (t.powi(3) * change)},
-      TweenType::QuadraticOut => { start + ((1f32-(1f32-t).powi(2)) * change)},
-      TweenType::CubicOut => { start + ((1f32-(1f32-t).powi(3)) * change)},
-    }
-  }
-
   pub fn tween(&mut self, dt : f32) -> (f32, f32){
     self.current_time += dt;
-    let t = self.current_time/self.finish_time;
-    let x = PositionTween::tween_internal(t, self.start_x, self.change_x, &self.tween_x);
-    let y = PositionTween::tween_internal(t, self.start_y, self.change_y, &self.tween_y);
+    let fraction_done = self.current_time/self.finish_time;
+    let x = self.tween_x.tween(self.start_x, self.change_x, fraction_done);
+    let y = self.tween_y.tween(self.start_y, self.change_y, fraction_done);
     return (x,y);
   }
 }
